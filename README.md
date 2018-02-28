@@ -50,7 +50,7 @@ The samples.props could be fed into following reranking components.
 
 Download the [English model](https://drive.google.com/open?id=0B1VhP65vISjoSXRHelVnSVNYSjA) and the [Chinese model](https://drive.google.com/open?id=0B1VhP65vISjodDM2NW9vRFdOQmM).
 
-    ./build/impl/Kparser-standard --cnn-mem 1700 --model_dir [model directory] -w [pretrained word embeddings] --train_dict [model directory]/train_dict < [stdin] > [stdout]
+    ./build/impl/Kparser-standard --cnn-mem 1700 --model_dir [model directory] -w [pretrained word embeddings] --train_dict [model directory]/train_dict --lang [en/ch] < [stdin] > [stdout]
 
 The standard input should follow the fomart, Word1 POS1 Word2 POS2 ... Wordn POSn. The example is
 
@@ -62,9 +62,19 @@ The standard output is tree in bracketed format.
 
 If you want to sample trees, you should added --samples [number of samples] --a [alpha], for example, --samples 100 --a 0.8
 
-We will upload the Chinese model soon.
+## Citation
 
-#### Contact
+    @article{TACL1199,   
+        author = {Liu, Jiangming  and Zhang, Yue },   
+        title = {In-Order Transition-based Constituent Parsing},   
+        journal = {Transactions of the Association for Computational Linguistics},   
+        volume = {5},   
+        year = {2017},   
+        issn = {2307-387X},   
+        pages = {413--424}   
+        }
+
+## Contact
 
 Jiangming Liu, jmliunlp@gmail.com
 
