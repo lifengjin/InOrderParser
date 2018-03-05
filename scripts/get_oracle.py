@@ -9,9 +9,9 @@ def unkify(tokens, words_dict, lang):
         if len(token.rstrip()) == 0:
             final.append('UNK')
         elif not(token.rstrip() in words_dict):
-	    if lang == "ch":
-		final.append('UNK')
-		continue;
+            if lang == "ch":
+                final.append('UNK')
+                continue
             numCaps = 0
             hasDigit = False
             hasDash = False
@@ -164,34 +164,34 @@ def get_actions(line):
 
 def construct(actions, trees):
     while len(actions) > 0:
-	act = actions[0]
-	actions = actions[1:]
-	if act[0] == 'N':
-		tree = [act]
-		actions, tree = construct(actions,tree)
-		trees.append(tree)
-	elif act[0] == 'S':
-		trees.append(act)
-	elif act[0] == 'R':
-		break;
-	else:
-		assert False
+        act = actions[0]
+        actions = actions[1:]
+        if act[0] == 'N':
+            tree = [act]
+            actions, tree = construct(actions,tree)
+            trees.append(tree)
+        elif act[0] == 'S':
+            trees.append(act)
+        elif act[0] == 'R':
+            break
+        else:
+            assert False
     return actions, trees
 
 def get_actions2(trees, actions):
-    if type(trees[1]) == types.ListType:
-	actions = get_actions2(trees[1], actions)
+    if type(trees[1]) == list:
+        actions = get_actions2(trees[1], actions)
     else:
-	actions.append(trees[1])
+        actions.append(trees[1])
 
-    assert type(trees[0]) == types.StringType
+    assert type(trees[0]) == list
     actions.append("PJ"+trees[0][2:])
     
     for item in trees[2:]:
-	if type(item) == types.ListType:
-		actions = get_actions2(item, actions)
-	else:
-		actions.append(item)
+        if type(item) == list:
+            actions = get_actions2(item, actions)
+        else:
+            actions.append(item)
     actions.append("REDUCE")
     return actions	
 
@@ -215,23 +215,23 @@ def main():
         if line.count('(') != line.count(')'):
             raise NotImplementedError('Unbalanced number of parenthesis in line ' + str(line_ctr)) 
         # first line: the bracketed tree itself itself 
-        print '# ' + line.rstrip()
+        print('# ' + line.rstrip())
         tags, tokens, lowercase = get_tags_tokens_lowercase(line)
         assert len(tags) == len(tokens)
         assert len(tokens) == len(lowercase)
-        print ' '.join(tags)
-        print ' '.join(tokens)
-        print ' '.join(lowercase)
+        print(' '.join(tags))
+        print(' '.join(tokens))
+        print(' '.join(lowercase))
         unkified = unkify(tokens, words_list, sys.argv[1])    
-        print ' '.join(unkified)
+        print(' '.join(unkified))
         output_actions = get_actions(line)
-	_, trees = construct(output_actions, [])
+        _, trees = construct(output_actions, [])
 
         output_actions2 = get_actions2(trees[0], [])
-	for action in output_actions2:
-            print action
-        print 'TERM'
-	print ''
+        for action in output_actions2:
+            print(action)
+        print('TERM')
+        print('')
     
 
 if __name__ == "__main__":
