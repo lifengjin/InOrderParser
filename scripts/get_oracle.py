@@ -184,7 +184,7 @@ def get_actions2(trees, actions):
     else:
         actions.append(trees[1])
 
-    assert type(trees[0]) == list
+    assert type(trees[0]) == list, type(trees[0])
     actions.append("PJ"+trees[0][2:])
     
     for item in trees[2:]:
