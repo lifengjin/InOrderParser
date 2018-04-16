@@ -179,7 +179,7 @@ def construct(actions, trees):
     return actions, trees
 
 def get_actions2(trees, actions):
-    print(trees)
+    # print(trees)
     if type(trees[1]) == list:
         actions = get_actions2(trees[1], actions)
     else:
