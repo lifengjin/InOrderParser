@@ -7,6 +7,8 @@ with open(sys.argv[1]) as ofh:
         words_and_tags = line.strip().split(' ')
         cur_frag = None
         whole_len = len(words_and_tags)
+        if whole_len <= 2:
+            continue
         for word_index in range(0, whole_len, 2):
             preterm = Tree(words_and_tags[word_index+1], [words_and_tags[word_index],])
             if not cur_frag:
