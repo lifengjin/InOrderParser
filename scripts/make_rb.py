@@ -12,5 +12,5 @@ with open(sys.argv[1]) as ofh:
             if not cur_frag:
                 cur_frag = preterm
             else:
-                cur_frag = Tree('S' , [cur_frag, preterm])
+                cur_frag = Tree('V' , [cur_frag, preterm])
         print(cur_frag.pformat(margin=10000))
