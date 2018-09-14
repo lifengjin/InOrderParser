@@ -1,3 +1,5 @@
+import sys
+
 def is_next_open_bracket(line, start_idx):
     for char in line[(start_idx + 1):]:
         if char == '(':
@@ -42,7 +44,8 @@ def get_dict(lines):
     return words_list 
 
 if __name__ == '__main__':
-    input_file = open('train.con', 'r')
+    input_file = sys.argv[1]
+    input_file = open(input_file, 'r')
     lines = input_file.readlines()
     words_list = get_dict(lines) 
     #print 'number of words', len(words_list)
